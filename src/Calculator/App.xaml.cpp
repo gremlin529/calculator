@@ -43,6 +43,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Media::Animation;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::ApplicationModel::Activation;
+using namespace Microsoft::Gaming::XboxGameBar;
 
 namespace CalculatorApp
 {
@@ -199,7 +200,6 @@ void App::OnLaunched(LaunchActivatedEventArgs ^ args)
 
 void App::OnAppLaunch(IActivatedEventArgs ^ args, String ^ argument)
 {
-
     // Uncomment the following lines to display frame-rate and per-frame CPU usage info.
     //#if _DEBUG
     //    if (IsDebuggerPresent())
@@ -416,12 +416,39 @@ void App::RegisterDependencyProperties()
 
 void App::OnActivated(IActivatedEventArgs ^ args)
 {
+    XboxGameBarUIExtensionActivatedEventArgs ^ uiExtArgs = nullptr;
+
     if (args->Kind == ActivationKind::Protocol)
     {
-        // We currently don't pass the uri as an argument,
-        // and handle any protocol launch as a normal app launch.
-        OnAppLaunch(args, nullptr);
+        auto protocolArgs = dynamic_cast<IProtocolActivatedEventArgs ^>(args);
+        if (protocolArgs)
+        {
+            if (0 != wcsstr(protocolArgs->Uri->AbsoluteUri->Data(), L"ms-gamebaruiextension:"))
+            {
+                uiExtArgs = dynamic_cast<XboxGameBarUIExtensionActivatedEventArgs ^>(args);
+            }
+        }
+
+        if (!uiExtArgs)
+        {
+            // We currently don't pass the uri as an argument,
+            // and handle any protocol launch as a normal app launch.
+            OnAppLaunch(args, nullptr);
+        }
     }
+
+    if (uiExtArgs)
+    {
+        auto rootFrame = ref new Frame();
+        Window::Current->Content = rootFrame;
+
+        m_uiExtension = ref new XboxGameBarUIExtension(uiExtArgs, Window::Current->CoreWindow, rootFrame);
+
+        rootFrame->Navigate(TypeName(MainPage::typeid), nullptr);
+
+        Window::Current->Activate();
+    }
+
 }
 
 void CalculatorApp::App::OnSuspending(Object ^ sender, SuspendingEventArgs ^ args)
@@ -433,6 +460,3 @@ void App::DismissedEventHandler(SplashScreen ^ sender, Object ^ e)
 {
     SetupJumpList();
 }
-
-
-

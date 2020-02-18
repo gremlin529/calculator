@@ -1,5 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" IgnorableNamespaces="uap uap5 mp">
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+         xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+         IgnorableNamespaces="uap uap3 uap5 mp">
     <Identity Name="Microsoft.WindowsCalculator.Dev" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="0.0.1.0" />
     <mp:PhoneIdentity PhoneProductId="b58171c6-c70c-4266-a2e8-8f9c994f4456" PhonePublisherId="95d94207-0c7c-47ed-82db-d75c81153c35" />
     <Properties>
@@ -36,9 +41,52 @@
                         <uap:Logo>Assets\CalculatorAppList.png</uap:Logo>
                     </uap:Protocol>
                 </uap:Extension>
+                <uap3:Extension Category="windows.appExtension">
+                    <uap3:AppExtension Name="microsoft.gameBarUIExtension"
+                                       Id="MSCalculator"
+                                       DisplayName="Calculator (Dev!)"
+                                       Description="A calculator you can easily access during the game"
+                                       PublicFolder="GameBar">
+                        <uap3:Properties>
+                            <HomeMenuVisible>true</HomeMenuVisible>
+                            <PinningSupported>true</PinningSupported>
+                            <SettingsSupported AppExtensionId="YourSettingsExtensionId" />
+                            <Window>
+                                <Size>
+                                    <Height>500</Height>
+                                    <Width>320</Width>
+                                    <MinHeight>500</MinHeight>
+                                    <MinWidth>320</MinWidth>
+                                    <MaxHeight>1024</MaxHeight>
+                                    <MaxWidth>1024</MaxWidth>
+                                </Size>
+                                <ResizeSupported>
+                                    <Horizontal>true</Horizontal>
+                                    <Vertical>true</Vertical>
+                                </ResizeSupported>
+                                <PinningSupported>true</PinningSupported>
+                                <ActivateAfterInstall>true</ActivateAfterInstall>
+                            </Window>
+                        </uap3:Properties>
+                    </uap3:AppExtension>
+                </uap3:Extension>
             </Extensions>
         </Application>
     </Applications>
+    <Extensions>
+        <!-- Enlighten COM on where to find Metadata Based Marshaling (MBM) data for the Game Bar private types 
+       <Path> is a required element (by VS) and has to point to a binary in the package, but it's not used when the class id is 00000355-0000-0000-C000-000000000046 (MBM). Due to that we just put the Microsoft.Gaming.XboxGameBar.winmd here. -->
+        <Extension Category="windows.activatableClass.proxyStub">
+            <ProxyStub ClassId="00000355-0000-0000-C000-000000000046">
+                <Path>Microsoft.Gaming.XboxGameBar.winmd</Path>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IGbrtServerApiFactory" InterfaceId="ACEC8903-5583-4D21-ACF4-EC79559B9B05" />
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IGbrtServerApiFactoryFactory" InterfaceId="38ADF632-990F-4D5F-A2A7-5A05C0533962" />
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarUIExtensionActivatedEventArgsPrivate" InterfaceId="782535A7-9407-4572-BFCB-316B4086F102" />
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarUIExtensionHost" InterfaceId="5D12BC93-212B-4B9F-9091-76B73BF56525" />
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarUIExtensionPrivate" InterfaceId="22ABA97F-FB0F-4439-9BDD-2C67B2D5AA8F" />
+            </ProxyStub>
+        </Extension>
+    </Extensions>
     <Capabilities>
         <Capability Name="internetClient" />
     </Capabilities>

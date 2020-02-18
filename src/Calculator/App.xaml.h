@@ -87,5 +87,7 @@ namespace CalculatorApp
         bool m_preLaunched;
 
         Windows::UI::Xaml::Controls::Primitives::Popup ^ m_aboutPopup;
+
+        Microsoft::Gaming::XboxGameBar::XboxGameBarUIExtension ^ m_uiExtension { nullptr };
     };
 }

@@ -141,6 +141,9 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
@@ -150,6 +153,9 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
@@ -160,7 +166,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_ARM)\pgort.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_ARM)\pgort.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -172,7 +178,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_ARM)\pgort.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_ARM)\pgort.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -183,6 +189,9 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -193,7 +202,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_x86)\pgort.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_x86)\pgort.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -204,6 +213,9 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -214,7 +226,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_x64)\pgort.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;$(VC_ReferencesPath_VC_x64)\pgort.lib;%(AdditionalDependencies);OneCore.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(IsStoreBuild)' == 'True'">
@@ -972,6 +984,7 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.targets" Condition="Exists('..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.targets')" />
     <Import Project="..\..\packages\Microsoft.UI.Xaml.2.2.190830001\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\packages\Microsoft.UI.Xaml.2.2.190830001\build\native\Microsoft.UI.Xaml.targets')" />
+    <Import Project="..\..\packages\Microsoft.Gaming.XboxGameBar.1.0.200213002-prerelease\build\native\Microsoft.Gaming.XboxGameBar.targets" Condition="Exists('..\..\packages\Microsoft.Gaming.XboxGameBar.1.0.200213002-prerelease\build\native\Microsoft.Gaming.XboxGameBar.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -980,5 +993,6 @@
     <Error Condition="!Exists('..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.WindowsCalculator.PGO.1.0.2\build\native\Microsoft.WindowsCalculator.PGO.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.UI.Xaml.2.2.190830001\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.UI.Xaml.2.2.190830001\build\native\Microsoft.UI.Xaml.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Gaming.XboxGameBar.1.0.200213002-prerelease\build\native\Microsoft.Gaming.XboxGameBar.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Gaming.XboxGameBar.1.0.200213002-prerelease\build\native\Microsoft.Gaming.XboxGameBar.targets'))" />
   </Target>
 </Project>
