@@ -50,7 +50,6 @@
                         <uap3:Properties>
                             <HomeMenuVisible>true</HomeMenuVisible>
                             <PinningSupported>true</PinningSupported>
-                            <SettingsSupported AppExtensionId="YourSettingsExtensionId" />
                             <Window>
                                 <Size>
                                     <Height>500</Height>
